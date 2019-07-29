@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--装配bean的三种方式，所谓的装配bean就是在xml写一个bean标签-->
+
+    <!-- 第一种方式: new 实现类-->
+    <bean id="userService1" class="com.sspu.service.UserServiceImpl"></bean>
+
+    <!-- 第二种方式：通过静态工厂方法
+      spring的版本过低，3.0版本,把jdk改成1.7
+    -->
+    <bean id="userService2" class="com.sspu.service.UserSereviceFactory1" factory-method="createUserService"></bean>
+
+    <!--第三种方式：通过实例工厂方法 -->
+    <!-- 创建实例factory2 bean-->
+    <bean id="factory2" class="com.sspu.service.UserSereviceFactory2"></bean>
+    <!-- factory2 bean 中再生成Bean-->
+    <bean id="userService3" factory-bean="factory2" factory-method="createUserService"></bean>
+
+</beans>
