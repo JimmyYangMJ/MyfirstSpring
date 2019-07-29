@@ -5,9 +5,14 @@
       <configuration>
         <fileset id="fileset" name="Beans" removed="false">
           <file>file://$MODULE_DIR$/src/beans.xml</file>
+          <file>file://$MODULE_DIR$/src/beans5.xml</file>
+          <file>file://$MODULE_DIR$/src/beans9.xml</file>
         </fileset>
         <fileset id="fileset2" name="Beans2" removed="false">
           <file>file://$MODULE_DIR$/src/beans2.xml</file>
+        </fileset>
+        <fileset id="fileset3" name="Beans8" removed="false">
+          <file>file://$MODULE_DIR$/src/beans8.xml</file>
         </fileset>
       </configuration>
     </facet>

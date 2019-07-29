@@ -1,5 +1,9 @@
 package com.sspu.test;
 
+import com.sspu.model.Customer;
+import com.sspu.model.Programmer;
+import com.sspu.model.Student;
+import com.sspu.model.User;
 import com.sspu.service.IUserService;
 import com.sspu.service.UserSereviceFactory1;
 import com.sspu.service.UserSereviceFactory2;
@@ -7,6 +11,8 @@ import com.sspu.service.UserServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class Test01 {
 
@@ -93,6 +99,10 @@ public class Test01 {
         userService3.add();
     }
 
+    /**		2. bean的作用域
+			1. singleton 单例模式（默认）
+            2. prototype 多例
+            实现  scope = “prototype” */
     @Test
     public void test4(){
         ApplicationContext context = new ClassPathXmlApplicationContext("beans4.xml");
@@ -105,4 +115,77 @@ public class Test01 {
         System.out.println(userService2);
     }
 
+    /**
+     * Bean 的生命周期
+     */
+    @Test
+    public void test5(){
+
+        //Bean的生命周期
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans5.xml");
+
+        User user = (User) context.getBean("user");
+        System.out.println(user);
+
+
+        //关闭容器
+        try {
+            context.getClass().getMethod("close").invoke(context);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 给对象的属性赋值方式 【】
+     * 1. 通过构造方法注入属性值
+     * 2. 通过set方法注入属性值
+     */
+    @Test
+    public void test6(){
+
+        /**
+         * 1.构造方法注入
+         */
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans6.xml");
+        Student stu  = (Student) context.getBean("stu");
+
+        System.out.println(stu);
+    }
+    /**
+     * SpEL:spring表达式
+     */
+    @Test
+    public void test8() throws Exception {
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans8.xml");
+
+        Customer customer  = (Customer) context.getBean("customer");
+        System.out.println(customer);
+        System.out.println(customer.getAddress());
+    }
+
+    /**
+     * Bean的集合注入
+     */
+    @Test
+    public void test9() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans9.xml");
+
+        Programmer programmer  = (Programmer) context.getBean("programmer");
+
+        System.out.println("车:" + programmer.getCars());
+        System.out.println("宠物:" + programmer.getPats());
+        System.out.println("个人信息:" + programmer.getInfos());
+        System.out.println("数据库连接信息:" + programmer.getMysqlInfos());
+        System.out.println("家庭成员:");
+        for (String member: programmer.getMembers()){
+            System.out.println(member);
+        }
+    }
 }
