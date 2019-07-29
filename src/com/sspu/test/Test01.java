@@ -5,8 +5,6 @@ import com.sspu.model.Programmer;
 import com.sspu.model.Student;
 import com.sspu.model.User;
 import com.sspu.service.IUserService;
-import com.sspu.service.UserSereviceFactory1;
-import com.sspu.service.UserSereviceFactory2;
 import com.sspu.service.UserServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +12,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * 通过配置 Beans.xml 将 类 装进容器
+ */
 public class Test01 {
 
     @Test

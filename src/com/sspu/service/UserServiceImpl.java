@@ -1,5 +1,11 @@
 package com.sspu.service;
 
+import com.sspu.model.User;
+import org.springframework.stereotype.Component;
+
+
+@Component("userService")
+// 或者 @Component
 public class UserServiceImpl implements IUserService {
 
     private String name = null;
@@ -20,4 +26,14 @@ public class UserServiceImpl implements IUserService {
     public UserServiceImpl() {
         System.out.println("UserServiceImpl（）调用了");
     }
+
+    @Override
+    public void add(User user) {
+        System.out.println("service 添加用户:" + user);
+        //调用dao
+        //userDao.add(user);
+    }
+
 }
+
+
