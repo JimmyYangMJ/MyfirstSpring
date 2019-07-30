@@ -2,6 +2,8 @@ package com.sspu.test;
 
 import com.sspu.model.User;
 import com.sspu.service.IUserService;
+import com.sspu.web.action.UserAction;
+import com.sspu.web.action.UserAction_annotate;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,5 +43,58 @@ public class Test02 {
         user.setUsername("杨明杰");
         service.add(user);
 
+    }
+
+    /**
+     * Action --Service-- Dao
+     * (不使用注释)
+     */
+    @Test
+    public void test11(){
+
+        //注解的使用
+        //web开发流程 action -> service -> dao
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans11.xml");
+        //拿到service
+        IUserService userService = (IUserService) context.getBean("userService");
+
+        //添加用户
+        User user = new User();
+        user.setUsername("gyf");
+        user.setPassword("1234");
+        userService.add(user);
+    }
+    @Test
+    public void test11_2(){
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans11.xml");
+
+        //拿到action
+        UserAction userAction = (UserAction) context.getBean("userAction");
+
+        //添加用户
+        User user = new User();
+        user.setUsername("gyf");
+        user.setPassword("1234");
+        userAction.save(user);
+    }
+
+    /**
+     * 使用注释
+     */
+    @Test
+    public void test12(){
+        //注解的使用
+        //web开发流程 action -> service -> dao
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans12.xml");
+
+        //获取action
+        UserAction_annotate userAction =  context.getBean(UserAction_annotate.class);
+        //添加用户
+        User user = new User();
+        user.setUsername("gyf");
+        user.setPassword("1234");
+        userAction.save(user);
     }
 }

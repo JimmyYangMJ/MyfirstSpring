@@ -1,5 +1,6 @@
 package com.sspu.service;
 
+import com.sspu.dao.IUserDao;
 import com.sspu.model.User;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,16 @@ import org.springframework.stereotype.Component;
 // 或者 @Component
 public class UserServiceImpl implements IUserService {
 
+    private IUserDao userDao;
     private String name = null;
+
+    public IUserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(IUserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public String getName() {
         return name;
@@ -31,7 +41,7 @@ public class UserServiceImpl implements IUserService {
     public void add(User user) {
         System.out.println("service 添加用户:" + user);
         //调用dao
-        //userDao.add(user);
+        userDao.add(user);
     }
 
 }

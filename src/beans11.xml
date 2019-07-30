@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1.配置dao-->
+    <bean id="userDao" class="com.sspu.dao.UserDaoImpl"></bean>
+
+    <!-- 2.配置service -->
+    <bean id="userService" class="com.sspu.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <!--3.配置action-->
+    <bean id="userAction" class="com.sspu.web.action.UserAction">
+        <property name="userService" ref="userService"></property>
+    </bean>
+</beans>
